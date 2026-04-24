@@ -77,9 +77,7 @@ async function runPipeline(): Promise<{
   console.log(`  Results: ${stages}`)
 
   if (report.errors && report.errors.length > 0) {
-    console.log(
-      `  Errors: ${report.errors.map((e) => e.stage).join(", ")}`
-    )
+    console.log(`  Errors: ${report.errors.map((e) => e.stage).join(", ")}`)
   }
 
   return { report, elapsed_ms }
@@ -144,7 +142,10 @@ async function main() {
     pipelineReport = result.report
     pipelineElapsedMs = result.elapsed_ms
 
-    const defaultSnapshotPath = path.join("eval-results", "latest-snapshot.json")
+    const defaultSnapshotPath = path.join(
+      "eval-results",
+      "latest-snapshot.json"
+    )
     await saveSnapshot(defaultSnapshotPath, pipelineReport)
 
     if (args.savePath) {

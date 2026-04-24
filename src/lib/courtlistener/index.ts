@@ -35,10 +35,7 @@ async function readCache(key: string): Promise<LookupResult | null> {
   }
 }
 
-async function writeCache(
-  key: string,
-  data: LookupResult
-): Promise<void> {
+async function writeCache(key: string, data: LookupResult): Promise<void> {
   await mkdir(CACHE_DIR, { recursive: true })
   await writeFile(
     path.join(CACHE_DIR, `${key}.json`),
@@ -92,7 +89,11 @@ export async function lookupCitation(
     })
 
     if (!searchRes.ok) {
-      return { found: false, reason: "error", details: `Search API returned ${searchRes.status}` }
+      return {
+        found: false,
+        reason: "error",
+        details: `Search API returned ${searchRes.status}`,
+      }
     }
 
     const searchData = await searchRes.json()
@@ -104,16 +105,16 @@ export async function lookupCitation(
     }
 
     const normalized = normalizeCitation(reporterCitation)
-    const match = searchData.results.find(
-      (r: { citation?: string[] }) =>
-        r.citation?.some((c: string) => normalizeCitation(c) === normalized)
+    const match = searchData.results.find((r: { citation?: string[] }) =>
+      r.citation?.some((c: string) => normalizeCitation(c) === normalized)
     )
 
     if (!match) {
       const returnedCitations = searchData.results
         .slice(0, 3)
-        .map((r: { caseName?: string; citation?: string[] }) =>
-          `${r.caseName}: [${(r.citation || []).join(", ")}]`
+        .map(
+          (r: { caseName?: string; citation?: string[] }) =>
+            `${r.caseName}: [${(r.citation || []).join(", ")}]`
         )
       console.log(
         `[courtlistener] no match for "${reporterCitation}" in ${searchData.results.length} results. Top: ${returnedCitations.join(" | ")}`
@@ -135,10 +136,7 @@ export async function lookupCitation(
       return result
     }
 
-    const opinionUrl = new URL(
-      `/api/rest/v4/opinions/${opinionId}/`,
-      BASE_URL
-    )
+    const opinionUrl = new URL(`/api/rest/v4/opinions/${opinionId}/`, BASE_URL)
     opinionUrl.searchParams.set("fields", "html_with_citations,plain_text")
 
     const opinionRes = await fetch(opinionUrl.toString(), {
@@ -146,13 +144,16 @@ export async function lookupCitation(
     })
 
     if (!opinionRes.ok) {
-      return { found: false, reason: "error", details: `Opinions API returned ${opinionRes.status}` }
+      return {
+        found: false,
+        reason: "error",
+        details: `Opinions API returned ${opinionRes.status}`,
+      }
     }
 
     const opinion = await opinionRes.json()
     const text =
-      opinion.plain_text ||
-      stripHtml(opinion.html_with_citations || "")
+      opinion.plain_text || stripHtml(opinion.html_with_citations || "")
 
     if (!text) {
       const result: LookupMiss = {

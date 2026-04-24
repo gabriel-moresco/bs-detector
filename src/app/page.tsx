@@ -54,7 +54,10 @@ import type {
 
 const VERDICT_CONFIG: Record<
   Verdict,
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
+  {
+    label: string
+    variant: "default" | "secondary" | "destructive" | "outline"
+  }
 > = {
   SUPPORTS: { label: "Supports", variant: "secondary" },
   MISREPRESENTS: { label: "Misrepresents", variant: "destructive" },
@@ -64,7 +67,10 @@ const VERDICT_CONFIG: Record<
 
 const QUOTE_VERDICT_CONFIG: Record<
   QuoteVerdict,
-  { label: string; variant: "default" | "secondary" | "destructive" | "outline" }
+  {
+    label: string
+    variant: "default" | "secondary" | "destructive" | "outline"
+  }
 > = {
   ACCURATE: { label: "Accurate", variant: "secondary" },
   ALTERED: { label: "Altered", variant: "destructive" },
@@ -158,7 +164,7 @@ function SummaryStats({ report }: { report: AnalysisReport }) {
           >
             {s.value}
           </span>
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+          <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
             {s.label}
           </span>
         </div>
@@ -191,8 +197,8 @@ function CitationCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 flex-wrap">
-          <span className="text-muted-foreground font-normal text-xs">
+        <CardTitle className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-normal text-muted-foreground">
             {citation.id}
           </span>
           <span>{citation.case_name}</span>
@@ -219,7 +225,7 @@ function CitationCard({
 
       <CardContent className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+          <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
             Proposition
           </span>
           <p className="text-foreground">{citation.proposition}</p>
@@ -227,10 +233,10 @@ function CitationCard({
 
         {citation.direct_quote && (
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
               Direct Quote
             </span>
-            <blockquote className="border-l-2 border-muted-foreground/30 pl-3 italic text-muted-foreground">
+            <blockquote className="border-l-2 border-muted-foreground/30 pl-3 text-muted-foreground italic">
               &ldquo;{citation.direct_quote}&rdquo;
             </blockquote>
           </div>
@@ -238,18 +244,18 @@ function CitationCard({
 
         {verification && (
           <Collapsible>
-            <CollapsibleTrigger className="group flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+            <CollapsibleTrigger className="group flex cursor-pointer items-center gap-1.5 text-[10px] tracking-wider text-muted-foreground uppercase transition-colors hover:text-foreground">
               <HugeiconsIcon
                 icon={ArrowDown01Icon}
                 className="size-3 transition-transform group-data-[state=closed]:-rotate-90"
               />
               Authority Verification
             </CollapsibleTrigger>
-            <CollapsibleContent className="pt-2 flex flex-col gap-2">
+            <CollapsibleContent className="flex flex-col gap-2 pt-2">
               <p>{verification.reasoning}</p>
               {verification.evidence_excerpt && (
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
                     Evidence Excerpt
                   </span>
                   <blockquote className="border-l-2 border-primary/40 pl-3 text-muted-foreground">
@@ -262,7 +268,7 @@ function CitationCard({
                   href={verification.courtlistener_url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary underline underline-offset-3 hover:text-primary/80 text-[11px]"
+                  className="text-[11px] text-primary underline underline-offset-3 hover:text-primary/80"
                 >
                   View on CourtListener
                 </a>
@@ -273,18 +279,18 @@ function CitationCard({
 
         {quoteVerification && (
           <Collapsible>
-            <CollapsibleTrigger className="group flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+            <CollapsibleTrigger className="group flex cursor-pointer items-center gap-1.5 text-[10px] tracking-wider text-muted-foreground uppercase transition-colors hover:text-foreground">
               <HugeiconsIcon
                 icon={ArrowDown01Icon}
                 className="size-3 transition-transform group-data-[state=closed]:-rotate-90"
               />
               Quote Verification
             </CollapsibleTrigger>
-            <CollapsibleContent className="pt-2 flex flex-col gap-2">
+            <CollapsibleContent className="flex flex-col gap-2 pt-2">
               <p>{quoteVerification.reasoning}</p>
               {quoteVerification.original_text && (
                 <div className="flex flex-col gap-1">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
                     Original Text
                   </span>
                   <blockquote className="border-l-2 border-primary/40 pl-3 text-muted-foreground">
@@ -294,7 +300,7 @@ function CitationCard({
               )}
               {quoteVerification.alterations.length > 0 && (
                 <div className="flex flex-col gap-1.5">
-                  <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+                  <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
                     Alterations
                   </span>
                   {quoteVerification.alterations.map((alt, i) => (
@@ -335,7 +341,7 @@ function CitationCard({
         )}
       </CardContent>
 
-      <CardFooter className="text-[10px] text-muted-foreground gap-2">
+      <CardFooter className="gap-2 text-[10px] text-muted-foreground">
         <span>§ {citation.location.section}</span>
         <span>¶ {citation.location.paragraph_index}</span>
         {citation.is_back_reference && (
@@ -366,8 +372,8 @@ function QuoteCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 flex-wrap">
-          <span className="text-muted-foreground font-normal text-xs">
+        <CardTitle className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-normal text-muted-foreground">
             {quoteVerification.citation_id}
           </span>
           {citation && <span>{citation.case_name}</span>}
@@ -389,17 +395,17 @@ function QuoteCard({
 
       <CardContent className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
-          <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+          <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
             Quote in Brief
           </span>
-          <blockquote className="border-l-2 border-muted-foreground/30 pl-3 italic text-muted-foreground">
+          <blockquote className="border-l-2 border-muted-foreground/30 pl-3 text-muted-foreground italic">
             &ldquo;{quoteVerification.quote}&rdquo;
           </blockquote>
         </div>
 
         {quoteVerification.original_text && (
           <div className="flex flex-col gap-1">
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
               Original Text
             </span>
             <blockquote className="border-l-2 border-primary/40 pl-3 text-muted-foreground">
@@ -412,7 +418,7 @@ function QuoteCard({
 
         {quoteVerification.alterations.length > 0 && (
           <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] uppercase tracking-wider text-muted-foreground">
+            <span className="text-[10px] tracking-wider text-muted-foreground uppercase">
               Alterations
             </span>
             {quoteVerification.alterations.map((alt, i) => (
@@ -465,8 +471,8 @@ function ClaimCard({
   return (
     <Card size="sm">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2 flex-wrap">
-          <span className="text-muted-foreground font-normal text-xs">
+        <CardTitle className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-normal text-muted-foreground">
             {claim.id}
           </span>
           <Badge variant="outline">{claim.category}</Badge>
@@ -481,7 +487,7 @@ function ClaimCard({
       <CardContent className="flex flex-col gap-2">
         <p className="text-foreground">{claim.claim}</p>
         <Collapsible>
-          <CollapsibleTrigger className="group flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-muted-foreground hover:text-foreground transition-colors cursor-pointer">
+          <CollapsibleTrigger className="group flex cursor-pointer items-center gap-1.5 text-[10px] tracking-wider text-muted-foreground uppercase transition-colors hover:text-foreground">
             <HugeiconsIcon
               icon={ArrowDown01Icon}
               className="size-3 transition-transform group-data-[state=closed]:-rotate-90"
@@ -495,7 +501,7 @@ function ClaimCard({
           </CollapsibleContent>
         </Collapsible>
       </CardContent>
-      <CardFooter className="text-[10px] text-muted-foreground gap-2">
+      <CardFooter className="gap-2 text-[10px] text-muted-foreground">
         <span>§ {claim.location.section}</span>
         <span>¶ {claim.location.paragraph_index}</span>
       </CardFooter>
@@ -591,10 +597,10 @@ function PipelineErrors({
         >
           <HugeiconsIcon
             icon={Alert01Icon}
-            className="size-4 text-destructive shrink-0 mt-0.5"
+            className="mt-0.5 size-4 shrink-0 text-destructive"
           />
           <div className="flex flex-col gap-0.5">
-            <span className="text-[10px] uppercase tracking-wider font-medium text-destructive">
+            <span className="text-[10px] font-medium tracking-wider text-destructive uppercase">
               {e.stage}
             </span>
             <span className="text-xs text-muted-foreground">{e.error}</span>
@@ -673,10 +679,10 @@ export default function Page() {
     : []
 
   return (
-    <div className="min-h-svh flex flex-col">
+    <div className="flex min-h-svh flex-col">
       {/* ---- Header ---- */}
       <header className="border-b border-border">
-        <div className="mx-auto max-w-4xl px-4 py-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mx-auto flex max-w-4xl flex-col gap-4 px-4 py-6 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-2">
               <HugeiconsIcon
@@ -719,7 +725,7 @@ export default function Page() {
 
       {/* ---- Content ---- */}
       <main className="flex-1">
-        <div className="mx-auto max-w-4xl px-4 py-6 flex flex-col gap-6">
+        <div className="mx-auto flex max-w-4xl flex-col gap-6 px-4 py-6">
           {/* Initial empty state */}
           {!report && !loading && !error && (
             <div className="flex flex-col items-center justify-center gap-4 py-20 text-center">
@@ -728,16 +734,22 @@ export default function Page() {
                 className="size-5 text-muted-foreground/40"
               />
               <div className="flex flex-col items-center gap-4">
-                <div className="flex flex-col gap-1 items-center">
+                <div className="flex flex-col items-center gap-1">
                   <p className="text-sm text-muted-foreground">
                     Ready to analyze.
                   </p>
                   <p className="text-xs text-muted-foreground/60">
-                    The pipeline extracts citations, verifies authorities, checks
-                    quotes, and extracts factual claims from a legal brief.
+                    The pipeline extracts citations, verifies authorities,
+                    checks quotes, and extracts factual claims from a legal
+                    brief.
                   </p>
                 </div>
-                <Button onClick={runAnalysis} disabled={loading} size="sm" className="w-32">
+                <Button
+                  onClick={runAnalysis}
+                  disabled={loading}
+                  size="sm"
+                  className="w-32"
+                >
                   <HugeiconsIcon
                     icon={PlayCircle02Icon}
                     data-icon="inline-start"
@@ -753,7 +765,7 @@ export default function Page() {
             <div className="flex items-start gap-2 border border-destructive/30 bg-destructive/5 p-4">
               <HugeiconsIcon
                 icon={DangerIcon}
-                className="size-4 text-destructive shrink-0 mt-0.5"
+                className="mt-0.5 size-4 shrink-0 text-destructive"
               />
               <div className="flex flex-col gap-0.5">
                 <span className="text-xs font-medium text-destructive">
@@ -767,7 +779,7 @@ export default function Page() {
           {/* Loading */}
           {loading && (
             <>
-              <p className="text-xs text-muted-foreground text-center">
+              <p className="text-center text-xs text-muted-foreground">
                 The pipeline is running — this may take a few minutes.
               </p>
               <ReportSkeleton />
@@ -780,7 +792,7 @@ export default function Page() {
               {/* Elapsed time + full JSON button */}
               <div className="flex items-center justify-between">
                 {elapsed != null && (
-                  <p className="text-[10px] text-muted-foreground/60 uppercase tracking-wider">
+                  <p className="text-[10px] tracking-wider text-muted-foreground/60 uppercase">
                     Completed in {(elapsed / 1000).toFixed(1)}s
                     {completedAt && (
                       <span>
@@ -856,8 +868,7 @@ export default function Page() {
                         const cardData: Record<string, unknown> = {
                           citation,
                         }
-                        if (verification)
-                          cardData.verification = verification
+                        if (verification) cardData.verification = verification
                         if (quoteVerification)
                           cardData.quoteVerification = quoteVerification
 
@@ -948,7 +959,7 @@ export default function Page() {
 
       {/* ---- Footer ---- */}
       <footer className="border-t border-border">
-        <div className="mx-auto max-w-4xl px-4 py-3 text-[10px] text-muted-foreground/50 flex items-center justify-between">
+        <div className="mx-auto flex max-w-4xl items-center justify-between px-4 py-3 text-[10px] text-muted-foreground/50">
           <span>BS Detector — Technical Assessment</span>
           <span>
             Press{" "}

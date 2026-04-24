@@ -34,15 +34,13 @@ export function JsonViewerDialog({
       <DialogContent className="flex max-h-[85vh] flex-col gap-0 p-0 sm:max-w-2xl md:max-w-4xl">
         <DialogHeader className="shrink-0 border-b border-border px-5 pt-5 pb-3">
           <DialogTitle>{title}</DialogTitle>
-          {description && (
-            <DialogDescription>{description}</DialogDescription>
-          )}
+          {description && <DialogDescription>{description}</DialogDescription>}
         </DialogHeader>
         <div className="min-h-0 flex-1 overflow-hidden p-4">
           <CodeBlock
             code={json}
             language="json"
-            className="max-h-[calc(85vh-10rem)] [&>div]:overflow-auto [&>div]:max-h-[calc(85vh-13rem)] [&_pre]:whitespace-pre-wrap [&_pre]:break-all"
+            className="max-h-[calc(85vh-10rem)] [&_pre]:break-all [&_pre]:whitespace-pre-wrap [&>div]:max-h-[calc(85vh-13rem)] [&>div]:overflow-auto"
           >
             <CodeBlockHeader>
               <CodeBlockActions className="ml-auto">

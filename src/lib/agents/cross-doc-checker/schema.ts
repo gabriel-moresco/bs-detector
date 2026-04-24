@@ -4,7 +4,7 @@ export const discrepancySchema = z.object({
   source_document: z
     .string()
     .describe(
-      'The name of the supporting document that contradicts or qualifies the claim. ' +
+      "The name of the supporting document that contradicts or qualifies the claim. " +
         'Example: "police_report", "medical_records", "witness_statement".'
     ),
   source_excerpt: z

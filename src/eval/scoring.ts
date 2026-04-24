@@ -484,8 +484,7 @@ export function scoreQuoteVerification(
       expected_verdict: golden.expected_verdict,
       actual_verdict: pQuote.verdict,
       correct:
-        (actualIsFlag && expectedIsFlag) ||
-        (!actualIsFlag && !expectedIsFlag),
+        (actualIsFlag && expectedIsFlag) || (!actualIsFlag && !expectedIsFlag),
       confidence: golden.confidence,
       notes: golden.notes,
     })

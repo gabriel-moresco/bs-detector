@@ -46,11 +46,7 @@ export function printConsoleReport(report: EvalReport): void {
     report.agents.authority_verification,
     log
   )
-  printAgentSection(
-    "Quote Verification",
-    report.agents.quote_verification,
-    log
-  )
+  printAgentSection("Quote Verification", report.agents.quote_verification, log)
   printCrossDocSection(report.agents.cross_doc_consistency, log)
   printSummary(report, log)
 
@@ -154,7 +150,9 @@ function printSummary(
   log(`  Overall Precision:    ${pct(report.summary.overall_precision)}`)
   log(`  Overall Recall:       ${pct(report.summary.overall_recall)}`)
   log(`  Overall F1:           ${pct(report.summary.overall_f1)}`)
-  log(`  Hallucination Rate:   ${pct(report.summary.overall_hallucination_rate)}`)
+  log(
+    `  Hallucination Rate:   ${pct(report.summary.overall_hallucination_rate)}`
+  )
   log()
   log(
     `  (TP: ${report.summary.total_tp}  ` +
