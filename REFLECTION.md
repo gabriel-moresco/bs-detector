@@ -44,3 +44,7 @@ The pipeline currently reads the Rivera v. Harmon case files from disk. There's 
 ## Pipeline execution time
 
 The full pipeline can take several minutes depending on the `OPENAI_REASONING_EFFORT` setting. With `high`, a run typically takes 4–6 minutes; with `medium`, closer to 2–3 minutes. This means the request can time out on platforms with strict function duration limits, and even locally the `curl` call just hangs for a while with no feedback. I didn't have time to build something more robust.
+
+## Model choice
+
+I chose `gpt-5.4-mini` with `medium` reasoning effort as the default. Given the pipeline's execution time constraints, a more capable configuration like `gpt-5.4-xhigh` would produce better analysis but push run times well past acceptable limits — especially with 20+ parallel LLM calls in the cross-doc checker stage alone.

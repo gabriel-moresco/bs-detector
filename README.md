@@ -48,6 +48,8 @@ pnpm dev
 
 The app runs at `http://localhost:3000`.
 
+> **Note on OpenAI rate limits:** The pipeline makes multiple parallel LLM calls (20+ in the cross-doc checker stage alone). Organizations on lower OpenAI API tiers may hit RPM or TPM limits, causing request failures. If you experience rate limit errors, consider lowering parallelism or upgrading your OpenAI API tier.
+
 ### Environment variables
 
 | Variable                  | Required | Default        | Description                                                                                    |
