@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="BS Detector platform preview" src="https://github.com/gabriel-moresco/bs-detector/blob/main/.github/readme.png" />
+  <img alt="BS Detector platform preview" src="https://github.com/gabriel-moresco/bs-detector/blob/main/readme.png" />
 </p>
 
 <h2 align="center">BS Detector</h2>
