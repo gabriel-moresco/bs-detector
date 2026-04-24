@@ -36,3 +36,11 @@ To reduce extraction ambiguity without overloading context, I decided to keep tw
 Ideally this pipeline would run asynchronously via a worker platform (e.g. BullMQ + Redis, Inngest, Trigger.dev). I went with a single synchronous endpoint instead to stay within the time budget and to keep the dev setup simple — no extra accounts, services, or environment variables. One `pnpm dev` and it runs.
 
 The trade-off: depending on how long the agent pipeline takes, serverless platforms like Vercel may hit their function execution time limit before it finishes. A long-running compute environment avoids this, but adds complexity that didn't fit the constraint.
+
+## Hardcoded input
+
+The pipeline currently reads the Rivera v. Harmon case files from disk. There's no way to pass arbitrary briefs or supporting documents through the API — the input is hardcoded to the four fixture files in `documents/`. I had a phased plan for this but didn't have time to implement it.
+
+## Pipeline execution time
+
+The full pipeline can take several minutes depending on the `OPENAI_REASONING_EFFORT` setting. With `high`, a run typically takes 4–6 minutes; with `medium`, closer to 2–3 minutes. This means the request can time out on platforms with strict function duration limits, and even locally the `curl` call just hangs for a while with no feedback. I didn't have time to build something more robust.
