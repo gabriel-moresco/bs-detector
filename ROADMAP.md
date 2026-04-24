@@ -120,7 +120,6 @@ Output: a structured JSON verification report — not prose.
 - **Input:** top findings filtered by severity × confidence.
 - **Output:** a single sober paragraph in judicial register, prose form.
 - **Analysis performed:** synthesizes only what matters for a judge — not everything.
-- **Streaming candidate** if time permits (only prose-output agent in the pipeline).
 
 ### Resilient orchestrator
 
@@ -131,18 +130,6 @@ Output: a structured JSON verification report — not prose.
 
 - Renders the report as cards per finding.
 - Color-codes by severity, exposes evidence in expandable sections, links findings back to the MSJ location.
-- Never shows raw JSON to the user.
-
-### Caselaw Access Project (CAP) fallback
-
-- If CourtListener returns no result, secondary lookup against case.law before declaring `LIKELY_FABRICATED`.
-- Reduces false-positive fabrication flags caused by coverage gaps.
-- Raises confidence in fabrication when both sources return empty.
-
-### Optional: LLM-as-judge for memo quality
-
-- Scores the `JudicialMemoAgent` output against a rubric (sobriety, accuracy, conciseness, judicial register).
-- Complements but does not replace mechanical metrics.
 
 ### `REFLECTION.md`
 
