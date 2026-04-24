@@ -7,7 +7,7 @@ import { SYSTEM_PROMPT } from "./prompt"
 import { llmClaimCheckSchema } from "./schema"
 
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.4-mini"
-const REASONING_EFFORT = process.env.OPENAI_REASONING_EFFORT || "high"
+const REASONING_EFFORT = process.env.OPENAI_REASONING_EFFORT || "medium"
 
 export type ClaimVerdict =
   | "CONSISTENT"
@@ -41,8 +41,7 @@ const TAG = "cross-doc-checker"
 function formatDocs(docs: SupportingDoc[]): string {
   return docs
     .map(
-      (doc) =>
-        `=== ${doc.name} ===\n${doc.content}\n=== end ${doc.name} ===`
+      (doc) => `=== ${doc.name} ===\n${doc.content}\n=== end ${doc.name} ===`
     )
     .join("\n\n")
 }
@@ -112,7 +111,8 @@ export async function checkCrossDocConsistency(
   const docsText = formatDocs(supportingDocs)
 
   const promises = claims.map(
-    async (claim): Promise<ClaimCheckResult> => checkSingleClaim(claim, docsText)
+    async (claim): Promise<ClaimCheckResult> =>
+      checkSingleClaim(claim, docsText)
   )
 
   const settled = await Promise.allSettled(promises)

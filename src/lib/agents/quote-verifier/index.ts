@@ -8,7 +8,7 @@ import { SYSTEM_PROMPT } from "./prompt"
 import { llmQuoteAnalysisSchema } from "./schema"
 
 const MODEL = process.env.OPENAI_MODEL || "gpt-5.4-mini"
-const REASONING_EFFORT = process.env.OPENAI_REASONING_EFFORT || "high"
+const REASONING_EFFORT = process.env.OPENAI_REASONING_EFFORT || "medium"
 
 const TAG = "quote-verifier"
 const OPINION_TEXT_MAX_CHARS = 30_000

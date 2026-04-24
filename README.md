@@ -50,16 +50,20 @@ The app runs at `http://localhost:3000`.
 
 ### Environment variables
 
-| Variable                  | Required | Default        | Description                                                                                  |
-| ------------------------- | -------- | -------------- | -------------------------------------------------------------------------------------------- |
-| `OPENAI_API_KEY`          | Yes      | —              | OpenAI API key                                                                               |
-| `COURTLISTENER_API_TOKEN` | Yes      | —              | CourtListener API token for case-law lookups                                                 |
-| `OPENAI_MODEL`            | No       | `gpt-5.4-mini` | Model identifier passed to `openai.responses()`. Falls back to `gpt-5.4-mini` if not set     |
-| `OPENAI_REASONING_EFFORT` | No       | `high`         | Reasoning effort for OpenAI calls (`low`, `medium`, `high`). Falls back to `high` if not set |
+| Variable                  | Required | Default        | Description                                                                                    |
+| ------------------------- | -------- | -------------- | ---------------------------------------------------------------------------------------------- |
+| `OPENAI_API_KEY`          | Yes      | —              | OpenAI API key                                                                                 |
+| `COURTLISTENER_API_TOKEN` | Yes      | —              | CourtListener API token for case-law lookups                                                   |
+| `OPENAI_MODEL`            | No       | `gpt-5.4-mini` | Model identifier passed to `openai.responses()`. Falls back to `gpt-5.4-mini` if not set       |
+| `OPENAI_REASONING_EFFORT` | No       | `medium`       | Reasoning effort for OpenAI calls (`low`, `medium`, `high`). Falls back to `medium` if not set |
 
 ## Usage
 
-### Analyze
+### Frontend
+
+The app includes a frontend that displays the verification report in a structured, readable way. After starting the dev server, open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### API
 
 ```bash
 curl -X POST http://localhost:3000/analyze
