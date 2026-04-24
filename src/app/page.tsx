@@ -696,7 +696,7 @@ export default function Page() {
               onClick={runAnalysis}
               disabled={loading}
               size="sm"
-              className="w-32"
+              className="w-36"
             >
               {loading ? (
                 <>
@@ -709,7 +709,7 @@ export default function Page() {
                     icon={PlayCircle02Icon}
                     data-icon="inline-start"
                   />
-                  {report ? "Rerun" : "Run Analysis"}
+                  {report ? "Rerun Analysis" : "Run Analysis"}
                 </>
               )}
             </Button>
